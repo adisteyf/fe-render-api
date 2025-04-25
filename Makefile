@@ -14,5 +14,15 @@ libfe-render-api.so: ${SRC} clean
 clean:
 	rm -f libfe-render-api.so
 
+test-clean:
+	rm -f tests/testGreetings
 
-.PHONY: all clean config.mk
+test: test-clean
+	ls libfe-render-api.so
+	@echo "Running tests..."
+
+	${CC} tests/testGreetings.c -o tests/testGreetings ${BUILDFLAGS}
+	./tests/testGreetings
+
+.PHONY: all clean config.mk test test-clean
+
