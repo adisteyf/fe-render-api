@@ -6,6 +6,8 @@
 CC = cc
 STD = c99
 OPTIMIZE = -O2
+SOBUILDFLAGS = -L. -lfe-render-api -Wl,-rpath,.
+BUILDFLAGS = ${SOBUILDFLAGS}
 
 PKG_CONFIG = pkg-config
 INCS = -Iinclude
