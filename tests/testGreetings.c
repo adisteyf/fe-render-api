@@ -1,8 +1,10 @@
-int ferTestGreetings (void);
+#include "rendercore.h"
+//int ferTestGreetings (void);
 
 int
 main (void)
 {
-  ferTestGreetings();
+  exmaple();
+  //ferTestGreetings();
   return 0;
 }
