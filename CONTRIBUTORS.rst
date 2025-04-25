@@ -16,7 +16,8 @@ Template of owner comment
    */
 
 If you need to check all of this contrib-comments just use command below::
-  grep -nErA2 'contrib-msg' *
+
+  $ grep -nErA2 'contrib-msg' *
 
 Don't forget to use **shawarmasquad's** methodic of writing a code.
 
