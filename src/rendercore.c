@@ -28,14 +28,12 @@ fer_init (int32_t render_api, int32_t window_api, int32_t vminor, int32_t vmajor
 
   //static int32_t isGlfwInitCalled = 1;
   switch (ret->window_api) {
-    case 1: {
-      glfwInit();
-      glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, vminor);
-      glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, vmajor);
-      glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-      break;
-    }
-
+  case FER_GLFW:
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, vminor);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, vmajor);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    break;
   default:
     printf("FE_RENDER_API,fer_init: UNKNOWN window_api\n");
     free(ret);
@@ -54,28 +52,22 @@ fer_createWindow (fer_t * fer, int32_t w, int32_t h, const char * title)
   }
 
   switch (fer->window_api) {
-    case 1: {
-      fer->mainwin = (void *)glfwCreateWindow(w,h,title,0,0);
-      glfwMakeContextCurrent((GLFWwindow *)fer->mainwin);
-      break;
-    }
-
+  case FER_GLFW:
+    fer->mainwin = (void *)glfwCreateWindow(w,h,title,0,0);
+    glfwMakeContextCurrent((GLFWwindow *)fer->mainwin);
+    return 0;
   default:
     printf("FE_RENDER_API,fer_createWindow: UNKNOWN window_api\n");
     return 2;
   }
-
-  return 0;
 }
 
 int
 fer_windowShouldClose (fer_t * fer)
 {
   switch (fer->window_api) {
-    case 1: {
+  case FER_GLFW:
       return glfwWindowShouldClose((GLFWwindow *)fer->mainwin);
-    }
-
   default:
     printf("FE_RENDER_API,fer_windowShouldClose: UNKNOWN window_api\n");
     return -1;
@@ -86,10 +78,9 @@ int
 fer_swapBuffers (fer_t * fer)
 {
   switch (fer->window_api) {
-    case 1: {
-      glfwSwapBuffers((GLFWwindow *)fer->mainwin);
-      return 0;
-    }
+  case FER_GLFW:
+    glfwSwapBuffers((GLFWwindow *)fer->mainwin);
+    return 0;
 
   default:
     printf("FE_RENDER_API,fer_windowShouldClose: UNKNOWN window_api\n");
@@ -101,11 +92,9 @@ int
 fer_pollEvents (fer_t * fer)
 {
   switch (fer->window_api) {
-    case 1: {
-      glfwPollEvents();
-      return 0;
-    }
-
+  case FER_GLFW:
+    glfwPollEvents();
+    return 0;
   default:
     printf("FE_RENDER_API,fer_windowShouldClose: UNKNOWN window_api\n");
     return -1;
@@ -114,5 +103,11 @@ fer_pollEvents (fer_t * fer)
 
 void
 fer_free (fer_t * fer) {
+  switch (fer->window_api) {
+  case FER_GLFW:
+    glfwTerminate();
+  default:
+    printf("FE_RENDER_API,fer_free(): UNKNOWN window_api\n");
+  }
   free(fer);
 }
