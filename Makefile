@@ -23,7 +23,7 @@ test: test-clean
 	ls libfe-render-api.so
 	@echo "Running tests..."
 
-	${CC} tests/testGreetings.c -o tests/testGreetings ${BUILDFLAGS}
+	${CC} tests/testGreetings.c -o tests/testGreetings ${BUILDFLAGS} ${INCS}
 	./tests/testGreetings
 
 .PHONY: all clean config.mk test test-clean

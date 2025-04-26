@@ -1,10 +1,9 @@
 #include "rendercore.h"
-//int ferTestGreetings (void);
 
 int
 main (void)
 {
-  exmaple();
-  //ferTestGreetings();
+  const char * result = fer_getVersion();
+  printf("%s\n", result);
   return 0;
 }
