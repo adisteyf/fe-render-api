@@ -1,7 +1,9 @@
+# contrib-msg
+# Contributor: Adisteyf (adk.)
+# Description: Script for Makefile build.
 .POSIX:
 
 include config.mk
-
 SRC = src/*.c
 
 all: libfe-render-api.so

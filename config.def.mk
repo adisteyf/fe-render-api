@@ -1,6 +1,10 @@
 # See LICENSE for more details
 # fe-render-api - reder API for FilesEngine
 # ---
+# contrib-msg
+# Contributor: Adisteyf (adk.)
+# Description: Default config for Makefile build.
+# ---
 # Customize your build here
 
 CC = cc
