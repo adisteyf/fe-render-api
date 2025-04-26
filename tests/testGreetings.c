@@ -11,7 +11,11 @@ main (void)
   printf("GPU API: %d\nWINDOW API: %d\n", testapi->render_api, testapi->window_api);
 
   fer_createWindow(testapi,800,600,"title");
-  system("read");
+
+  for (;!fer_windowShouldClose(testapi);) {
+    fer_swapBuffers(testapi);
+    fer_pollEvents(testapi);
+  }
 
   fer_free(testapi);
   return 0;

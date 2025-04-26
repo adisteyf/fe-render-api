@@ -57,6 +57,9 @@ typedef struct fer {
 fer_t * fer_init (int32_t, int32_t, int32_t, int32_t);
 void    fer_free (fer_t *);
 int     fer_createWindow (fer_t *, int32_t, int32_t, const char *);
+int     fer_windowShouldClose (fer_t *);
+int     fer_swapBuffers (fer_t *);
+int     fer_pollEvents (fer_t *);
 
 
 #endif // FER_RENDERCORE_H
