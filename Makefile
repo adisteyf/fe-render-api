@@ -4,7 +4,7 @@
 .POSIX:
 
 include config.mk
-SRC = src/*.c
+SRC = $(wildcard src/*.c)
 
 all: libfe-render-api.so
 config.mk:

@@ -7,6 +7,9 @@
 #ifndef FER_RENDERCORE_H
 #define FER_RENDERCORE_H
 
+/* includes */
+#include <stdint.h>
+
 
 #if defined(_WIN32) || defined(__WIN32__) || defined(__NT__) /* W*ndows */
     #ifdef _WIN64
@@ -35,7 +38,25 @@
 #define FER_VERSION_STRING __FER_DEFTOSTR(FER_VERSION_MAJOR) "." __FER_DEFTOSTR(FER_VERSION_MINOR)
 
 #define FER_API __attribute__((visibility("default")))
-FER_API const char * fer_getVersion (void);
+const char * fer_getVersion (void);
+
+/* Graphics APIs */
+#define FER_OPENGL 1
+#define FER_GLFW   1
+
+/* struct of API */
+typedef struct fer {
+  int32_t   render_api;
+  int32_t   window_api;
+  int32_t   vminor;
+  int32_t   vmajor;
+  void    * mainwin;
+} fer_t;
+
+/* functions */
+fer_t * fer_init (int32_t, int32_t, int32_t, int32_t);
+void    fer_free (fer_t *);
+int     fer_createWindow (fer_t *, int32_t, int32_t, const char *);
 
 
 #endif // FER_RENDERCORE_H
