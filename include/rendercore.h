@@ -8,7 +8,9 @@
 #define FER_RENDERCORE_H
 
 /* includes */
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <GL/gl.h>
 #include <stdint.h>
 
 
@@ -39,14 +41,17 @@
 #define FER_VERSION_STRING __FER_DEFTOSTR(FER_VERSION_MAJOR) "." __FER_DEFTOSTR(FER_VERSION_MINOR)
 
 #define FER_API __attribute__((visibility("default")))
-const char * fer_getVersion (void);
 
-/* Graphics APIs */
-#define FER_OPENGL 1
-#define FER_GLFW   1
+#if !defined(FER_WINDOW_MINOR) && !defined(FER_WINDOW_MAJOR)
+  #define FER_WINDOW_MAJOR 4
+  #define FER_WINDOW_MINOR 1
+#endif
+
+const char * fer_getVersion (void);
 
 /* struct of API */
 typedef struct fer {
+  int vminor,vmajor;
   union {
     GLFWwindow * glfwwin;
     // ...
@@ -56,8 +61,8 @@ typedef struct fer {
 /* functions */
 int     fer_createWindow (int32_t, int32_t, const char *);
 int     fer_windowShouldClose (void);
-void    fer_swapBuffers (void);
-void    fer_pollEvents (void);
-
+void    fer_endDrawing (void);
+int     fer_loadGlad (void);
+void    fer_clear (float, float, float, float);
 
 #endif // FER_RENDERCORE_H
