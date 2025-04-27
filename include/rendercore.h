@@ -8,6 +8,7 @@
 #define FER_RENDERCORE_H
 
 /* includes */
+#include <GLFW/glfw3.h>
 #include <stdint.h>
 
 
@@ -46,20 +47,17 @@ const char * fer_getVersion (void);
 
 /* struct of API */
 typedef struct fer {
-  int32_t   render_api;
-  int32_t   window_api;
-  int32_t   vminor;
-  int32_t   vmajor;
-  void    * mainwin;
+  union {
+    GLFWwindow * glfwwin;
+    // ...
+  };
 } fer_t;
 
 /* functions */
-fer_t * fer_init (int32_t, int32_t, int32_t, int32_t);
-void    fer_free (fer_t *);
-int     fer_createWindow (fer_t *, int32_t, int32_t, const char *);
-int     fer_windowShouldClose (fer_t *);
-int     fer_swapBuffers (fer_t *);
-int     fer_pollEvents (fer_t *);
+int     fer_createWindow (int32_t, int32_t, const char *);
+int     fer_windowShouldClose (void);
+void    fer_swapBuffers (void);
+void    fer_pollEvents (void);
 
 
 #endif // FER_RENDERCORE_H

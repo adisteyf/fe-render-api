@@ -1,3 +1,4 @@
+#define FER_WINDOW_GLFW
 #include "rendercore.h"
 #include <stdlib.h>
 
@@ -7,16 +8,16 @@ main (void)
   const char * result = fer_getVersion();
   printf("%s\n", result);
 
-  fer_t * testapi = fer_init(FER_OPENGL,FER_GLFW,4,1);
-  printf("GPU API: %d\nWINDOW API: %d\n", testapi->render_api, testapi->window_api);
+  /*printf("GPU API: %d\nWINDOW API: %d\n", testapi->render_api, testapi->window_api);
 
   fer_createWindow(testapi,800,600,"title");
+*/
+  fer_createWindow(800,600,"title");
 
-  for (;!fer_windowShouldClose(testapi);) {
-    fer_swapBuffers(testapi);
-    fer_pollEvents(testapi);
+  for (;!fer_windowShouldClose();) {
+    fer_swapBuffers();
+    fer_pollEvents();
   }
 
-  fer_free(testapi);
   return 0;
 }
